@@ -5,6 +5,7 @@ USER root
 COPY package*.json ./
 RUN npm install -g @angular/cli && \npm install
 COPY . .
+ENTRYPOINT npm run test
 RUN ng b --prod
 FROM base as final
 COPY --from=build-step /app/nginx.conf /etc/nginx/nginx.conf
